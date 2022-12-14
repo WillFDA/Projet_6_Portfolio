@@ -177,12 +177,265 @@ input[type="submit"]{
 	margin : 2em auto ;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
+	border: none;
 }
 
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
 }
 
+
+.login h2 {
+	margin-top: 5em;
+	text-align: center;
+}
+
+#login-form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+	width: 35%;
+	margin: auto;
+}
+#login-form input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#login-form label {
+	margin: 2em 0 1em 0;
+}
+
+#login-form textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.login-form-oublie {
+	/* text-decoration: none; */
+	text-align: center ;
+	color: black;
+}
+
+.modal__btn--container {
+	display: flex;
+	align-items: baseline;
+	justify-content: center;
+	gap: 2rem;
+	/* margin-left: 6rem; */
+
+}
+
+.modal__link {
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+}
+
+#modal1 , #modal2 {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.8);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal-wrapper {
+	width: 25%;
+	padding: 2.5rem 6.25rem;
+	background-color: white;
+	position: relative;
+	border-radius: 10px;
+}
+
+.modal h3 {
+	text-align: center;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 26px;
+	margin:3rem 0;
+}
+
+.leave {
+	cursor: pointer;
+	position: absolute;
+	right: 2.5rem;
+	top: 2rem;
+	font-size: 1.5em;
+}
+
+.modal__gallery {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	margin-left: 0.5rem;
+	gap: 6px;
+	margin-bottom: 2rem;
+	padding-bottom: 4rem;
+	height: 400px;
+}
+
+.modal__gallery::before {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 1px;
+	background-color: #B3B3B3;
+}
+
+.modal__figure {
+	width: 18%;
+	position: relative;
+	margin-bottom: 1rem;
+}
+
+.modal__figure i {
+	color: white;
+	z-index: 1;
+	position: absolute;
+	background-color: black;
+	padding: 0.5em;
+	border-radius: 2px;
+	border: 1px;
+	cursor: pointer;
+
+}
+
+.trash {
+	top: 0.5em;
+	right: 0.5em;
+}
+
+.direction {
+	top: 0.5em;
+	right: 3em;
+}
+
+.modal__figure figcaption {
+	font-family: 'Work Sans';
+	font-size: 0.875rem;
+	font-weight: 400;
+	cursor: pointer;
+}
+
+.modal__figure img {
+	width: 100%;
+	position: relative;
+	object-fit: contain;
+}
+
+.bottom__gallery {
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+}
+
+.bottom__gallery input {
+	cursor: pointer;
+	margin: 1rem;
+	padding: 0.5rem 0;
+	font-size: 15px;
+	width: 237px;
+	border: none;
+	text-decoration: none;
+}
+
+.delete__gallery {
+	cursor: pointer;
+	font-family: 'Syne';
+	font-weight: 400;
+	font-size: 14px;
+	color: #D65353;
+}
+
+#modal2 {
+	z-index: 2;
+	background: transparent;
+	
+}
+
+.modal__body {
+	position: relative;
+}
+
+.modal__body::before {
+	content: "";
+	position: absolute;
+	bottom: 80px;
+	width: 100%;
+	height: 1px;
+	background-color: #B3B3B3;
+}
+
+.modal__add__img--container {
+	margin: auto;
+	padding: 2rem;
+	background-color: #E8F1F7;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: 3px ;
+	gap: 1em;
+}
+
+.img-icon {
+	color:#B9C5CC;
+	font-size: 4rem;
+}
+
+.add-photo {
+	background-color: #CBD6DC;
+	border-radius: 50px;
+	border: none;
+	font-family: 'Work Sans';
+	font-weight: 500;
+	color: #306685;
+	font-size: 1rem;
+	padding: 0.5rem 2rem;
+}
+
+
+.modal__body form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin: 2rem 0;
+}
+.modal__body input, select {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	margin-bottom: 1rem;
+}
+
+.modal__body select {
+	appearance: none;
+}
+.modal__body select::after {
+	content: '/25BC' ;
+}
+
+.modal__body input[type="submit"] {
+	margin-top: 4rem;
+	background: #A7A7A7;
+	width: 237px;
+	height: 36px;
+}
