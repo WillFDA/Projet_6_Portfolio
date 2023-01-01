@@ -11,6 +11,14 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="https://kit.fontawesome.com/44d3f60ba9.js" crossorigin="anonymous"></script>
 </head>
+<div class="edition-mode__container" style="display: none;">
+	<div class="mode-edition">
+		<i class="fa-regular fa-pen-to-square"></i>
+		<span>Mode édition</span>
+	</div>
+
+	<button>publier les changements</button>
+</div>
 <body>
 	<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false" style="display: none">
 		<div class="modal-wrapper js-modal-stop">
@@ -19,51 +27,50 @@
 			<div class="modal__gallery">
 			</div>
 			<div class="bottom__gallery">
-				<input href="#modal2" class="js-modal2" type="submit" value="Ajouter une photo">
+				<input href="#modal-Form" class="js-modal-Form" type="submit" value="Ajouter une photo">
 				<span class="delete__gallery">Supprimer la galerie</span>
 			</div>
-				<!-- <figure class="modal__figure">
-					<i class="direction fa-solid fa-arrows-up-down-left-right" style="display: none;"></i>
-					<i class=" trash fa-solid fa-trash-can"></i>
-					<img src="./assets/images/abajour-tahina.png" alt="">
-					<figcaption>éditer</figcaption>
-				</figure> -->
-				<div id="modal2" class="modal" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
-					<div class="modal-wrapper js-modal-stop">
-						<i class="leave js-close-modal fa-solid fa-xmark"></i>
-						<h3 id="titlemodal">Ajout photo</h3>
-						<div class="modal__body">
-							<div class="modal__add__img--container">
-								<i class="img-icon fa-regular fa-image"></i>
-								<label for="photo">
-								<input id="photo" type="file">
-								<button href="#photo" class="add-photo">+ Ajouter photo</button>
-								</label>
-								
-								<span>jpg, png : 4mo max</span>
-							</div>
-							<form action="#" method="post">
-								<label for="name">Nom</label>
-								<input type="text" name="name" id="name">
-								<label for="email">Catégorie</label>
-								<select type="email" name="format" id="format">
-								<option selected disabled value=""></option>
-								<option value="Bar & restaurant">Bar & restaurant</option>
-								<option value="autre & autre">autre & autre</option>
-								<input type="submit" value="Valider">
-							</form>
-						</div>
-					</div>
+		</div>
+	</aside>
+	<aside id="modal-Form" class="modal" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
+		<div class="modal-wrapper js-modal-stop">
+			<i class="leave js-close-modal fa-solid fa-xmark"></i>
+			<i class="fa-solid fa-arrow-left backward"></i>
+			<h3 id="titlemodal">Ajout photo</h3>
+			<div class="modal__body">
+				<div class="modal-img-container">
+					<figure class="image-container">
+						<img id="chosen-image" src="" alt="">
+					</figure>
+					<label for="upload-button" class="label-file">
+						<i class="img-icon fa-regular fa-image"></i>
+						<span>+ Ajouter photo</span>
+					</label>
+					<input id="upload-button" class="input-file" type="file">
+					<span>jpg, png : 4mo max</span>
 				</div>
+				<form id="photo-submit" action="#" method="post">
+					<label for="name">Nom</label>
+					<input type="text" name="name" id="name">
+					<label for="categorie">Catégorie</label>
+					<select type="categorie" name="format" id="category">
+						<option selected disabled value=""></option>
+						<option data-btn="3" value="Hôtels & restaurants">Hôtels & restaurants</option>
+						<option data-btn="1" value="Objets">Objets</option>
+						<option data-btn="2" value="Appartements">Appartements</option>
+					</select>
+					<input type="submit" value="Valider">
+				</form>
+			</div>
 		</div>
 	</aside>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
+			<li id="projets">projets</li>
 			<li>contact</li>
-			<li>login</li>
+			<li><a class="login__btn" href="./pages/login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -74,6 +81,10 @@
 			<img src="./assets/images/sophie-bluel.png" alt="">
 		</figure>
 		<article>
+			<!-- <a class="modal__link edit_activation" href="">
+				<i href="" class=" fa-regular fa-pen-to-square"></i>
+				<span href="" class="">modifier</span>
+			</a> -->
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
@@ -83,10 +94,16 @@
 	<section id="portfolio">
 		<div class="modal__btn--container">
 			<h2>Mes Projets</h2>
-			<a class="modal__link js-modal" href="#modal1">
+			<a class="modal__link js-modal" href="#modal1" style="display: none;"">
 				<i href="#modal1" class=" js-modal fa-regular fa-pen-to-square"></i>
 				<span href="#modal1" class="js-modal">modifier</span>
 			</a>
+		</div>
+		<div class="buttons">
+			<button class="btn-clicked" type="button">Tous</button>
+			<button type="button" data-btn="1">Objets</button>
+			<button type="button" data-btn="2">Appartements</button>
+			<button type="button" data-btn="3">Hôtels & restaurants</button>
 		</div>
 		<div class="gallery">
 		</div>
@@ -113,6 +130,6 @@
 		</ul>
 	</nav>
 </footer>
-<script src="./assets/script/script.js"></script>
+<script src="./scripts/index.js"></script>
 </body>
 </html>
