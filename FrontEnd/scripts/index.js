@@ -5,6 +5,8 @@ let token = localStorage.getItem("token");
 const btns = document.querySelectorAll('.buttons button');
 let imgs = []
 
+// -------------------------------------------------------------------------------------
+
 // Met la classe au bouton selectionné par le click (car il est cvallback dans filter img)
 function setActiveBtn(e) {
     btns.forEach(btn => {
@@ -50,10 +52,6 @@ function activateFilter() {
 }
 
 // -----------------------------------------------------------------------------------------------
-
-
-
-
 
 
 // ------- Affiche les photo dans la gallerie ------------------------------
@@ -108,11 +106,7 @@ function photoModal(element) {
 // ------------------------------------------------------------------------------------------
 
 
-
-
-
 // ouverture des modal / fermeture --------------
-
 
   function openModal(modalId) {
     const modal = document.querySelector(modalId);
@@ -127,6 +121,12 @@ function photoModal(element) {
       modal.style.display = 'none';
       modal.setAttribute('aria-modal', 'false');
     });
+    document.getElementById('photo-submit').reset();
+    chosenImage.setAttribute('src', '');
+    titleValue = null;
+    btnValue = null;
+    imageSelected = null;
+    document.querySelector('.label-file').removeAttribute("style");
   }
   
   function eventPropagation(modal) {
@@ -147,6 +147,7 @@ function photoModal(element) {
   
   document.querySelector('.js-modal-Form').addEventListener('click', function(event) {
     event.preventDefault();
+    closeModals();
     openModal('#modal-Form');
   });
   
@@ -185,7 +186,6 @@ let galleryModal = document.querySelector('.modal__gallery');
 let gallery = document.querySelector('.gallery');
 function deleteImg(e) {
   let id = e.target.id;
-  // counter = id;
   let figureModal = galleryModal.querySelector(`#figure-${id}`);
   console.log(figureModal)
   figureModal.remove()
@@ -212,16 +212,14 @@ function deleteImg(e) {
   .catch((err) => {})
 }
 
-// -------------------------------------------------------------------------------------
-
 // Gestion ajout de l'image
 
 let photoForm = document.getElementById('photo-submit');
+const submitButton = photoForm.querySelector('input[type^="sub"]');
 let btnValue = null;
 let titleValue= null;
 document.getElementById('category').addEventListener('change', (e) => {
   titleValue = document.getElementById('name').value;
-  console.log(titleValue)
   btnValue = e.target.options[e.target.selectedIndex].getAttribute('data-btn');
 })
 
@@ -231,6 +229,7 @@ let fileName = document.getElementById('file-name');
 
 
 let imageSelected = null;
+
 
 uploadButton.onchange = () => {
   let reader = new FileReader(); 
@@ -242,10 +241,17 @@ uploadButton.onchange = () => {
   let labelClass = document.querySelector('.label-file');
   labelClass.style.display = 'none';
 }
-console.log(titleValue)
 
 photoForm.addEventListener("submit", function(e){
   e.preventDefault();
+  if (!titleValue || !btnValue || !imageSelected) {
+    document.querySelector('.error-message').innerHTML ="Vous devez remplir tous les champs du formulaire"
+    // console.error("Vous devez remplir tous les champs du formulaire");
+    return;
+  } else {
+    document.querySelector('.error-message').innerHTML = ""
+  }
+
   let formData = new FormData();
   formData.append("image", imageSelected)
   formData.append("title", titleValue )
@@ -258,19 +264,13 @@ photoForm.addEventListener("submit", function(e){
     },
     body: formData,
   })
-  .then(res => res.json()) 
+  .then(res => res.json())
+  .then(data => {
+    affichePhoto()
+  })
+  .catch((err) => {})
+  closeModals();
 });
-
-
-
-
-
-
-
-
-
-
-
 
 // -------------- Gestion login et logout -----------
 

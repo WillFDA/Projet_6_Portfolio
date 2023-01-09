@@ -37,6 +37,7 @@
 			<i class="leave js-close-modal fa-solid fa-xmark"></i>
 			<i class="fa-solid fa-arrow-left backward"></i>
 			<h3 id="titlemodal">Ajout photo</h3>
+			<span class="error-message"></span>
 			<div class="modal__body">
 				<div class="modal-img-container">
 					<figure class="image-container">
@@ -44,10 +45,11 @@
 					</figure>
 					<label for="upload-button" class="label-file">
 						<i class="img-icon fa-regular fa-image"></i>
-						<span>+ Ajouter photo</span>
+						<span class="upload-button__btn">+ Ajouter photo</span>
+						<span>jpg, png : 4mo max</span>
 					</label>
 					<input id="upload-button" class="input-file" type="file">
-					<span>jpg, png : 4mo max</span>
+					
 				</div>
 				<form id="photo-submit" action="#" method="post">
 					<label for="name">Nom</label>
