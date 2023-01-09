@@ -88,6 +88,7 @@ function photoGallery(element) {
     const figure = document.createElement("figure");
     figure.setAttribute("data-img", `${element.categoryId}`);
     figure.setAttribute("data-id", `${counter}`);
+    figure.setAttribute('id', `figure-${element.id}`)
      let newFigure = document.querySelector(".gallery").appendChild(figure);
     newFigure.innerHTML = `<img src="${element.imageUrl}" alt="${element.title}" crossorigin="anonymous" ">
     <figcaption>${element.title}</figcaption>`;
@@ -95,6 +96,7 @@ function photoGallery(element) {
 
 function photoModal(element) {
     let figure = document.createElement("figure");
+    figure.setAttribute('id', `figure-${element.id}`);
     let newFigureModal = document
           .querySelector(".modal__gallery")
           .appendChild(figure);
@@ -112,7 +114,7 @@ function photoModal(element) {
 // ouverture des modal / fermeture --------------
 
 
-function openModal(modalId) {
+  function openModal(modalId) {
     const modal = document.querySelector(modalId);
     modal.style.display = null;
     modal.setAttribute('aria-modal', 'true');
@@ -179,16 +181,18 @@ function openModal(modalId) {
 // ---------------------------------------------------------------------------------------------------
 
 // supression de l'image
+let galleryModal = document.querySelector('.modal__gallery');
 let gallery = document.querySelector('.gallery');
-
 function deleteImg(e) {
   let id = e.target.id;
   // counter = id;
-  let figure = gallery.querySelector(`figure[data-id="${id}"]`);
+  let figureModal = galleryModal.querySelector(`#figure-${id}`);
+  console.log(figureModal)
+  figureModal.remove()
+  let figure = gallery.querySelector(`#figure-${id}`);
+  console.log(figure)
   figure.remove()
-  const figureElement = e.target.parentNode;
-  const galleryElement = figureElement.parentNode;
-  galleryElement.removeChild(figureElement);
+  
   fetch("http://localhost:5678/api/works/" + id, {
     method: "DELETE",
     headers: {
@@ -205,7 +209,7 @@ function deleteImg(e) {
   .then(data => {
     affichePhoto()
   })
-  .catch((err) => console.log(err))
+  .catch((err) => {})
 }
 
 // -------------------------------------------------------------------------------------
@@ -214,32 +218,17 @@ function deleteImg(e) {
 
 let photoForm = document.getElementById('photo-submit');
 let btnValue = null;
+let titleValue= null;
 document.getElementById('category').addEventListener('change', (e) => {
+  titleValue = document.getElementById('name').value;
+  console.log(titleValue)
   btnValue = e.target.options[e.target.selectedIndex].getAttribute('data-btn');
 })
-
-
-photoForm.addEventListener("submit", function(e){
-  e.preventDefault();
- 
-  let formData = new FormData();
-  formData.append("image", imageSelected)
-  formData.append("title", titleValue )
-  formData.append('category', btnValue)
-  fetch("http://localhost:5678/api/works", {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-    },
-    body: formData,
-  })
-  .then(res => res.json()) 
-});
 
 let uploadButton = document.getElementById('upload-button');
 let chosenImage = document.getElementById('chosen-image');
 let fileName = document.getElementById('file-name');
-let titleValue = document.getElementById('name').value;
+
 
 let imageSelected = null;
 
@@ -253,6 +242,25 @@ uploadButton.onchange = () => {
   let labelClass = document.querySelector('.label-file');
   labelClass.style.display = 'none';
 }
+console.log(titleValue)
+
+photoForm.addEventListener("submit", function(e){
+  e.preventDefault();
+  let formData = new FormData();
+  formData.append("image", imageSelected)
+  formData.append("title", titleValue )
+  formData.append('category', btnValue)
+  fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      Authorization: "Bearer " + token 
+    },
+    body: formData,
+  })
+  .then(res => res.json()) 
+});
+
 
 
 
